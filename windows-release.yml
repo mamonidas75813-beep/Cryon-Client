@@ -1,0 +1,37 @@
+name: CRYON Windows Build
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: CRYON-CLIENT
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Build, test and verify Windows packages
+        run: npm run build:windows
+
+      - name: Upload Windows installer, portable build and checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: CRYON-CLIENT-v0.10.5-Windows-x64
+          path: CRYON-CLIENT/release/*
+          if-no-files-found: error
+          retention-days: 30
