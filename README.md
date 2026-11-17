@@ -23,7 +23,7 @@ npm start
 Build for Windows
 On a Windows 10/11 x64 machine, open a terminal in `CRYON-CLIENT/` and run:
 ```bat
-build.bat
+build installer and build portable
 ```
 The build script runs the project's preflight checks, source checks and tests before packaging. Consult the build log and the project's build documentation if a step fails. Do not treat an unsigned local build as a signed public release.
 Tests and verification
